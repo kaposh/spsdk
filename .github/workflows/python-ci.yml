@@ -40,7 +40,7 @@ jobs:
     - name: Run Codecheck - Master
       if: github.event_name == 'push'
       run: |
-        python codecheck.py -s --output reports_codecheck --check PYTEST
+        python codecheck.py -s --output reports_codecheck --check GITCOV --info-check gitcov
         #python codecheck.py -s --output reports_codecheck --info-check gitcov --info-check copyright
 
     - name: Run Codecheck - Pull Request
@@ -53,5 +53,5 @@ jobs:
       with:
         name: Results-${{ matrix.python-version }}-${{ matrix.os }}
         path: reports_codecheck
-      if: always() && job.status == 'failure'
+      #if: always() && job.status == 'failure'
 
