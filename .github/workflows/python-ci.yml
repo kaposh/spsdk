@@ -26,27 +26,31 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set-up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v4.3.0
       with:
         python-version: ${{ matrix.python-version }}
         architecture: 'x64'
 
-    - name: Install dependencies
+    - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements-develop.txt
 
-    - name: Run codecheck
+    - name: Run Codecheck - Master
+      if: github.event_name == 'push'
       run: |
-        echo "event name is:" ${{ github.event_name }} 
-        python codecheck.py -s --output reports_py310 --check copyright
-        #python ./codecheck.py --output reports_py310 --info-check gitcov --info-check copyright
+        python codecheck.py -s --output reports_codecheck --info-check gitcov --info-check copyright
 
-    - name: Archive results
+    - name: Run Codecheck - Pull Request
+      if: github.event_name == 'pull_request'
+      run: |
+        python codecheck.py -s --output reports_codecheck
+
+    - name: Archive Results
       uses: actions/upload-artifact@v3
       with:
         name: Results-${{ matrix.python-version }}-${{ matrix.os }}
-        path: reports_py310
+        path: reports_codecheck
       if: always() && job.status == 'failure'
 
