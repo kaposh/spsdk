@@ -37,6 +37,10 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements-develop.txt
 
+    - name: Install SPSDK
+      run: |
+        python setup.py install
+
     - name: Run Codecheck - Master
       if: github.event_name == 'push'
       run: |
