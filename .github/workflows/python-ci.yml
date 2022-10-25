@@ -39,12 +39,13 @@ jobs:
 
     - name: Install SPSDK
       run: |
+        # This is required for dependencies check
         python setup.py install
 
     - name: Run Codecheck - Master
       if: github.event_name == 'push'
       run: |
-        python codecheck.py -s --output reports_codecheck --check DEPENDENCIES --check PYDOCSTYLE --check RADON_ALL --check RADON_C --check RADON_D
+        python codecheck.py -s --output reports_codecheck --check BLACK --check ISORT
         #python codecheck.py -s --output reports_codecheck --info-check gitcov --info-check copyright
 
     - name: Run Codecheck - Pull Request
