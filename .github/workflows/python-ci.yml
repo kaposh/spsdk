@@ -40,7 +40,7 @@ jobs:
 
     - name: Run codecheck
       run: |
-        python ./codecheck.py -s --output reports_py310 --info-check gitcov,copyright
+        python ./codecheck.py --output reports_py310 --info-check gitcov --info-check copyright
 
     - name: Archive results
       uses: actions/upload-artifact@v3
