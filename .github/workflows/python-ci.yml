@@ -18,9 +18,9 @@ jobs:
     strategy:
       matrix:
         #os: [ubuntu-latest,windows-latest,macos-latest]
-        os: [macos-latest]
-        python-version: ['3.7','3.10']
-        #python-version: ['3.10']
+        os: [ubuntu-latest]
+        #python-version: ['3.7','3.10']
+        python-version: ['3.10']
 
     name: Python ${{ matrix.python-version }} on ${{ matrix.os }}
     steps:
@@ -40,7 +40,8 @@ jobs:
     - name: Run Codecheck - Master
       if: github.event_name == 'push'
       run: |
-        python codecheck.py -s --output reports_codecheck --info-check gitcov --info-check copyright
+        python codecheck.py -s --output reports_codecheck --check PYTEST
+        #python codecheck.py -s --output reports_codecheck --info-check gitcov --info-check copyright
 
     - name: Run Codecheck - Pull Request
       if: github.event_name == 'pull_request'
