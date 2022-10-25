@@ -40,7 +40,7 @@ jobs:
     - name: Run Codecheck - Master
       if: github.event_name == 'push'
       run: |
-        python codecheck.py -s --output reports_codecheck --check PYLINT_DOCS --check MYPY --check MYPY_TOOLS
+        python codecheck.py -s --output reports_codecheck --check DEPENDENCIES --check PYDOCSTYLE --check RADON_ALL --check RADON_C --check RADON_D
         #python codecheck.py -s --output reports_codecheck --info-check gitcov --info-check copyright
 
     - name: Run Codecheck - Pull Request
