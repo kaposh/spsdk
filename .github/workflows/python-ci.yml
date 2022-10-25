@@ -41,6 +41,7 @@ jobs:
 
     - name: Run codecheck
       run: |
+        echo "event name is:" ${{ github.event_name }} 
         python codecheck.py --output reports_py310 --info-check gitcov
         #python ./codecheck.py --output reports_py310 --info-check gitcov --info-check copyright
 
