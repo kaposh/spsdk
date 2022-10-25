@@ -45,6 +45,7 @@ jobs:
     - name: Run Codecheck - Master
       if: github.event_name == 'push'
       run: |
+        git rev-parse 1478ad0256e6615820b84c3e3a4ab421bf61f24c^
         python codecheck.py -s --output reports_codecheck --check copyright
         #python codecheck.py -s --output reports_codecheck --info-check gitcov --info-check copyright
 

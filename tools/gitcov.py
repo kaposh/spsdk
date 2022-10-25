@@ -395,7 +395,7 @@ def get_parent_commit() -> str:
 
         if on_crossroad is True:
             break
-
+        print("Getting REV-PARSE!")
         current_sha = (
             subprocess.check_output(["git", "rev-parse", current_sha + "^"]).strip().decode("utf-8")
         )
