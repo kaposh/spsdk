@@ -356,7 +356,9 @@ def get_parent_commit() -> str:
     # Check all branches D is part of
     # D is part of B1 and B2 branches
     # We are on a crossroad -> return D sha
+    print("Getting commit SHA")
     current_sha = subprocess.check_output(["git", "rev-parse", "HEAD"]).strip().decode("utf-8")
+    print(f"SHA {current_sha}")
     logging.debug(f"Initial sha: {current_sha}")
     merge_commits = (
         subprocess.check_output(["git", "rev-list", "--merges", current_sha])
