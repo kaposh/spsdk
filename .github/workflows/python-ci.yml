@@ -20,7 +20,8 @@ jobs:
       matrix:
         # os: [ubuntu-latest,windows-latest,maxOS-latest]
         os: [ubuntu-latest]
-        python-version: ['3.10' ]
+        # python-version: ['3.7','3.10']
+        python-version: ['3.10']
 
     name: Python ${{ matrix.python-version }} on ${{ matrix.os }}
     steps:
@@ -40,12 +41,14 @@ jobs:
 
     - name: Run codecheck
       run: |
-        python ./codecheck.py --output reports_py310 --info-check gitcov --info-check copyright
+        pwd
+        git status
+        #python ./codecheck.py --output reports_py310 --info-check gitcov --info-check copyright
 
     - name: Archive results
       uses: actions/upload-artifact@v3
       with:
         name: Results-${{ matrix.python-version }}-${{ matrix.os }}
         path: reports_py310
-      if: always()
+      #if: always() && job.status == 'failure'
 
