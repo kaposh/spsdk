@@ -58,5 +58,5 @@ jobs:
       with:
         name: Results-${{ matrix.python-version }}-${{ matrix.os }}
         path: reports_codecheck
-      #if: always() && job.status == 'failure'
+      if: always() && job.status == 'failure'
 
